@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>HH Goa 2026 — Frame Generator</title>
+  <meta name="description" content="Upload a photo, get your HH Goa 2026 builder frame or badge, share on X.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="app__header">
+      <div class="app__logo">HH GOA <span>2026</span></div>
+      <p class="app__tagline">Photo in, builder card out. Pick a design, done in seconds.</p>
+    </header>
+
+    <!-- Step 1: Upload zone -->
+    <section class="step">
+      <p class="step__label">1. Your photo</p>
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="fileInput" accept="image/*,.heic,.heif" hidden>
+        <div class="upload-zone__prompt" id="uploadPrompt">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M12 16V4M12 4l-4 4M12 4l4 4" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p><strong>Tap to upload a photo</strong></p>
+          <p class="upload-zone__hint">JPG, PNG, or HEIC from your iPhone</p>
+        </div>
+        <img id="uploadedThumb" class="upload-zone__thumb" alt="" hidden>
+      </div>
+    </section>
+
+    <!-- Step 2: Details -->
+    <section class="step">
+      <p class="step__label">2. Your details</p>
+      <div class="card-fields">
+        <label class="field">
+          <span>Name *</span>
+          <input type="text" id="nameInput" maxlength="24" placeholder="Your name" autocomplete="name">
+        </label>
+        <label class="field">
+          <span>Stack / Role</span>
+          <input type="text" id="roleInput" maxlength="24" placeholder="e.g. Web3 dev, Designer, AI/ML">
+        </label>
+        <label class="field">
+          <span>Email</span>
+          <input type="email" id="emailInput" maxlength="40" placeholder="you@example.com" autocomplete="email">
+        </label>
+      </div>
+    </section>
+
+    <!-- Step 3: Template picker -->
+    <section class="step">
+      <p class="step__label">3. Pick a design</p>
+      <div class="template-grid" id="templateGrid"></div>
+    </section>
+
+    <!-- Status / error messages -->
+    <p class="status" id="statusMsg" role="status" aria-live="polite"></p>
+
+    <!-- Result -->
+    <section class="result" id="resultSection" hidden>
+      <canvas id="outputCanvas"></canvas>
+      <div class="result__actions">
+        <button class="btn btn--secondary" id="downloadBtn">Download</button>
+        <button class="btn btn--primary" id="shareBtn">Share to X</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- heic2any: converts iPhone HEIC photos to a canvas-readable format in the browser -->
+  <script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+  <script src="templates.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
